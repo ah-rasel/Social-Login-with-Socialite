@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SocialLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/auth/google',[SocialLoginController::class,'redirectToGoogle'])->name('login.google');
+Route::get('auth/google/callback',[SocialLoginController::class,'authenticatedByGoogle']);
