@@ -28,7 +28,8 @@ class SocialLoginController extends Controller
                     'name'=>$user->name,
                     'email'=>$user->email,
                     'google_id'=>$user->id,
-                    'password'=>bcrypt("12345678"),//This password has no value as authentication is being done by google
+                    'password'=>"12345678", //Not encrypting this for some reason bcrypt() is the function i use to encrypt
+                    //This password has no value as authentication is being done by google
                 ]);
                 Auth::login($new_user);
                 return redirect()->route('dashboard');
@@ -38,4 +39,13 @@ class SocialLoginController extends Controller
 
         }
     }
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function authenticatedByFacebook()
+    {
+        // Do stuffs after authenticating by facebook like how its done above for google
+    }
+    
 }
